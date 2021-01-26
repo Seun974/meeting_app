@@ -77,6 +77,7 @@ public class Meeting implements Comparable<Meeting> {
     }
 
     public List<AppUser> getParticipants() {
+        if(participants == null) participants = new ArrayList<>(); //sets the participant to always have a list as default
         return participants;
     }
 
