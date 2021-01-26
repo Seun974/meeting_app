@@ -1,11 +1,14 @@
 package se.lexicon.samuel.model;
 
+import se.lexicon.samuel.App;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+//this will have details of the participants and meeting features
 public class Meeting implements Comparable<Meeting> {
     private String meetingId;
     private LocalDateTime start;
@@ -79,6 +82,19 @@ public class Meeting implements Comparable<Meeting> {
 
     public void setParticipants(List<AppUser> participants) {
         this.participants = participants;
+    }
+    //method to add participants
+    public void addParticipants(AppUser appUser){
+        if(!participants.contains(appUser)){ //if participants does not contain
+            participants.add(appUser);
+            appUser.getMeetings().add(this);
+        }
+    }
+
+    public void removeParticipants(AppUser appUser){
+        if(participants.contains(appUser)){
+            appUser.getMeetings().remove(this);
+        }
     }
 
     @Override

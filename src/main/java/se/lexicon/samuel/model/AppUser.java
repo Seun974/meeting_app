@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.TreeSet;
 import java.util.UUID;
 
+//this class will handle details of the meetings that the users can access
 public class AppUser {
     private String userId;
     private String userName;
@@ -65,12 +66,31 @@ public class AppUser {
     }
 
     public TreeSet<Meeting> getMeetings() {
+        if(meetings == null) meetings = new TreeSet<>(); //so this makes meeting return an empty set instead of a null value
         return meetings;
     }
-
-    public void setMeetings(TreeSet<Meeting> meetings) {
+    //THIS SETTER WILL WORK BUT NOT BE accessed publicly
+    void setMeetings(TreeSet<Meeting> meetings){
         this.meetings = meetings;
     }
+
+    //this method adds a meeting to the collection of meetings but still checks for duplicates before adding
+    //this add returns a boolean
+    //this method makes a participant able to add himself to the meeting
+    public void addMeeting(Meeting meeting){
+        if(meetings.add(meeting)){
+            if(! meeting.getParticipants().contains(this)) //getting participants directly adds specific participants to the meeting schedule
+            meeting.getParticipants().add(this);
+        }
+    }
+    //when you have a add method, you also put a remove method
+    //this method makes a participant able to remove himself to the meeting
+    public void removeMeeting(Meeting meeting){
+        if(meetings.remove(meeting)){
+            meeting.getParticipants().remove(this);//this removes the meeting and does not remove the participants too
+        }
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -96,3 +116,20 @@ public class AppUser {
                 '}';
     }
 }
+
+
+//===================================================================================================================
+//this could involve maybe a case where meeting is cancelled or no meeting scheduled and we want to set a meeting
+//this is not going to be used since the add and remove is being applied just for demonstration
+//for bi-directional the add and remove methods are also ok.
+//    public void setMeetings(TreeSet<Meeting> meetings) {
+//        if(meetings == null || meetings.isEmpty()){ //note null comes before the .isEmpty
+//            meetings = new TreeSet<>();
+//            for(this.meetings){
+//                for(Meeting m : this.meetings){
+//                    removeMeeting(m);
+//                }
+//            }
+//        }
+//        this.meetings = meetings;
+//    }
