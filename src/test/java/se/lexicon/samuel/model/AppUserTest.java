@@ -52,6 +52,7 @@ public class AppUserTest {
         assertTrue(testObject.getMeetings().contains(meeting));
         assertTrue(meeting.getParticipants().contains(testObject));
     }
+
     @Test
     //Giving meeting addMeeting removes meeting bidirectional (adds meeting both ways)
     //this method takes the opposite implementation of the addMeeting
@@ -65,4 +66,15 @@ public class AppUserTest {
         assertFalse(meeting.getParticipants().contains(testObject));
 
     }
+
+//    @Test
+//    //display name meeting with null throws illegalArgumentException
+//    public void addMeetingWithNull(){
+//
+//        assertThrows(
+//                IllegalArgumentException.class,
+//                () -> testObject.addMeeting(null)
+//        );
+//    }
+//************ line 74 is flagging an error with the assert throw
 }

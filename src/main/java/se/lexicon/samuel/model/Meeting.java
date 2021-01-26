@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 //this will have details of the participants and meeting features
+//comparable makes it possible to sort params in fields
 public class Meeting implements Comparable<Meeting> {
     private String meetingId;
     private LocalDateTime start;
@@ -91,7 +92,7 @@ public class Meeting implements Comparable<Meeting> {
             appUser.getMeetings().add(this);
         }
     }
-
+    //this method takes care of removing participants
     public void removeParticipants(AppUser appUser){
         if(participants.contains(appUser)){
             appUser.getMeetings().remove(this);

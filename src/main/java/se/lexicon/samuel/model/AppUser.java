@@ -1,5 +1,6 @@
 package se.lexicon.samuel.model;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.TreeSet;
@@ -76,13 +77,15 @@ public class AppUser {
 
     //this method adds a meeting to the collection of meetings but still checks for duplicates before adding
     //this add returns a boolean
-    //this method makes a participant able to add himself to the meeting
+    //this method makes a participant able to add himself to the meeting and throws an exception if you try to add an empty meeting
     public void addMeeting(Meeting meeting){
+        if(meeting == null) throw new IllegalArgumentException("Invalid parameter meeting was null");
         if(meetings.add(meeting)){
             if(! meeting.getParticipants().contains(this)) //getting participants directly adds specific participants to the meeting schedule
             meeting.getParticipants().add(this);
         }
     }
+
     //when you have a add method, you also put a remove method
     //this method makes a participant able to remove himself to the meeting
     public void removeMeeting(Meeting meeting){
@@ -90,7 +93,6 @@ public class AppUser {
             meeting.getParticipants().remove(this);//this removes the meeting and does not remove the participants too
         }
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -117,7 +119,7 @@ public class AppUser {
     }
 }
 
-
+//codes below...
 //===================================================================================================================
 //this could involve maybe a case where meeting is cancelled or no meeting scheduled and we want to set a meeting
 //this is not going to be used since the add and remove is being applied just for demonstration
@@ -132,4 +134,12 @@ public class AppUser {
 //            }
 //        }
 //        this.meetings = meetings;
+//    }
+
+
+//method to allow a meeting to be setup by the app user with some specific parameters(organizer)
+//simple implementation. take note of the organizer. so a method like this can be set up to get a method running from the appUser
+//    public void setUpMeeting(LocalDateTime start, LocalDateTime end, String topic, String agenda){
+//        Meeting meeting = new Meeting(start, end, topic, agenda, this);
+//
 //    }
