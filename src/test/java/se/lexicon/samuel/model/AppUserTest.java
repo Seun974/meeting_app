@@ -1,11 +1,12 @@
 package se.lexicon.samuel.model;
 
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 //focus is on testing the add and remove meeting
 public class AppUserTest {
@@ -28,7 +29,7 @@ public class AppUserTest {
         );
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         testObject = new AppUser(
                 USER_NAME, PASSWORD, FIRST_NAME, LAST_NAME
@@ -67,14 +68,14 @@ public class AppUserTest {
 
     }
 
-//    @Test
-//    //display name meeting with null throws illegalArgumentException
-//    public void addMeetingWithNull(){
-//
-//        assertThrows(
-//                IllegalArgumentException.class,
-//                () -> testObject.addMeeting(null)
-//        );
-//    }
-//************ line 74 is flagging an error with the assert throw
+    @Test
+    //display name meeting with null throws illegalArgumentException
+    public void addMeetingWithNull(){
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> testObject.addMeeting(null)
+        );
+    }
+
 }

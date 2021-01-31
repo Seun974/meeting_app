@@ -1,11 +1,13 @@
 package se.lexicon.samuel.model;
 
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MeetingTest {
 
@@ -23,8 +25,9 @@ public class MeetingTest {
         return appUser;
     }
 
-    @Before
+
     //also introduce constant here to take up the fields
+    @BeforeEach
     public void setUp() throws Exception{
         testObject = new Meeting(
                 START,
@@ -52,13 +55,14 @@ public class MeetingTest {
     }
 
     @Test
-    //removes from appUser
+    @DisplayName("removes from appUser")
     public void removeAppUser() {
+        //arrange
         AppUser appUser = createAppUser();
         testObject.addParticipants(appUser);
-
+        //act
         testObject.removeParticipants(appUser);
-
+        //assert
         assertFalse(testObject.getParticipants().contains(appUser));
         assertFalse(appUser.getMeetings().contains(testObject));
 
